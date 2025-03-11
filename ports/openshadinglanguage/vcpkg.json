@@ -22,7 +22,18 @@
             "name": "pugixml"
         },
         {
-            "name": "zstd"
+            "name": "llvm",
+            "default-features": false,
+            "features": [
+                "clang",
+                "target-nvptx",
+                "target-x86",
+                "target-spirv"
+            ]
+        },
+        {
+            "name": "ztsd",
+            "triplet": "x64-windows-static"
         }
     ]
 }
