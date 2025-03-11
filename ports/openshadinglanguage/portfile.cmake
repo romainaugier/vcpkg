@@ -6,19 +6,42 @@ vcpkg_from_github(
     HEAD_REF main
     )
 
-vcpkg_find_acquire_program(FLEX)
-vcpkg_find_acquire_program(BISON)
+if(VCPKG_TARGET_IS_WINDOWS)
+    vcpkg_from_github(
+        OUT_SOURCE_PATH FLEX_BISON_SOURCE_PATH
+        REPO lexxmark/winflexbison
+        REF v2.5.25
+        SHA512 7a797d5a1aef21786b4ce8bc8f2a31c4957e55012a4d29b14fbe6d89c1b8ad33e7ab6d1afec6b37ddccd1696dc5b861da568fc8a14d22bb33aa7c1116172d7cf
+        )
+
+    vcpkg_execute_build_process(
+        COMMAND "buildVS2022.bat" 
+        WORKING_DIRECTORY "${FLEX_BISON_SOURCE_PATH}"
+        LOGNAME winflexbison_build
+        )
+
+    set(BISON_ROOT "${FLEX_BISON_SOURCE_PATH}/bin/Release")
+    message(STATUS "BISON_ROOT=${BISON_ROOT}")
+elseif(VCPKG_TARGET_IS_LINUX)
+    vcpkg_find_acquire_program(FLEX)
+    vcpkg_find_acquire_program(BISON)
+endif()
 
 vcpkg_cmake_configure(
     SOURCE_PATH "${SOURCE_PATH}"
     OPTIONS
-        -DBUILD_TESTING:BOOL=OFF
-        -DOSL_USE_OPTIX:BOOL=OFF
-        -DUSE_partio:BOOL=OFF
-        -DUSE_PYTHON:BOOL=OFF
+        -DBUILD_TESTING=OFF
+        -DOSL_USE_OPTIX=OFF
+        -DUSE_partio=OFF
+        -DUSE_PYTHON=OFF
+        -DUSE_PYTHON3=OFF
+        -DUSE_QT5=OFF
+        -DUSE_QT6=OFF
+        -DBISON_ROOT="${BISON_ROOT}"
+        -DFLEX_ROOT="${BISON_ROOT}"
     )
 
-vcpkg_cmake_install()
+vcpkg_cmake_install(DISABLE_PARALLEL)
 vcpkg_copy_pdbs()
 
 file(INSTALL "${CURRENT_PACKAGES_DIR}/cmake/llvm_macros.cmake" DESTINATION "${CURRENT_PACKAGES_DIR}/share/${PORT}")
