@@ -13,9 +13,6 @@
             "name": "vcpkg-cmake-config"
         },
         {
-            "name": "llvm"
-        },
-        {
             "name": "openimageio"
         },
         {

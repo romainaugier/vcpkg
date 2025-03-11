@@ -27,6 +27,8 @@ elseif(VCPKG_TARGET_IS_LINUX)
     vcpkg_find_acquire_program(BISON)
 endif()
 
+vcpkg_find_acquire_program(CLANG)
+
 vcpkg_cmake_configure(
     SOURCE_PATH "${SOURCE_PATH}"
     OPTIONS
