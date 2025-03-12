@@ -63,7 +63,10 @@ vcpkg_cmake_configure(
         # -DLLVM_ROOT="${LLVM_INSTALL_DIR}/${LLVM_FILE_NAME}"
     )
 
-vcpkg_cmake_install(DISABLE_PARALLEL)
+vcpkg_cmake_build()
+
+vcpkg_cmake_install()
+
 vcpkg_copy_pdbs()
 
 file(INSTALL "${CURRENT_PACKAGES_DIR}/cmake/llvm_macros.cmake" DESTINATION "${CURRENT_PACKAGES_DIR}/share/${PORT}")
