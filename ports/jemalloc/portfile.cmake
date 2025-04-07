@@ -9,7 +9,9 @@ vcpkg_from_github(
         preprocessor.patch
 )
 if(VCPKG_TARGET_IS_WINDOWS)
-    set(opts "ac_cv_search_log=none required" "--without-private-namespace")
+    set(opts "ac_cv_search_log=none required" "--without-private-namespace" "--with-jemalloc-prefix=je_")
+else()
+    set(opts "--with-jemalloc-prefix=je_")
 endif()
 
 vcpkg_make_configure(
