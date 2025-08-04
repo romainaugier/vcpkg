@@ -1,6 +1,6 @@
 {
   "name": "qt",
-  "version": "6.8.2",
+  "version": "6.8.3",
   "port-version": 1,
   "description": "A cross-platform application and UI framework.",
   "homepage": "https://www.qt.io/",
@@ -178,13 +178,17 @@
     },
     {
       "name": "qtwebengine",
+      "default-features": false
+    },
+    {
+      "name": "qtwebengine",
       "default-features": false,
       "features": [
         "geolocation",
         "spellchecker",
         "webchannel"
       ],
-      "platform": "!static & !(windows & arm)"
+      "platform": "(linux | osx | (windows & x64)) & !static"
     },
     {
       "name": "qtwebsockets",
