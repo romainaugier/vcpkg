@@ -2,12 +2,10 @@ vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO AcademySoftwareFoundation/OpenColorIO
     REF "v${VERSION}"
-    SHA512 d5f3a4b5bd661af7336c015d07e0feccb286464a08239a3c259a97217001161e7571f5137475fc2f4d1b9af6381bbfa03c0b60f41de282f114307961b8d84fc9
+    SHA512 d626007d7a7ae26f4cf2fa8e5675963af9127f500f824548ccc4e659ddb2cd275b988822b4f66e0170971426dc330d106e281cdae63a5bd141b9aadaa874a746
     HEAD_REF master
     PATCHES
-        fix-dependency.patch
         fix-del-install-file.patch
-        fix-func-param.patch #https://github.com/AcademySoftwareFoundation/OpenColorIO/pull/1806
         fix-pkgconfig.patch
 )
 
